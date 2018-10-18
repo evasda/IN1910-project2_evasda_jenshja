@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <stdexcept>
 using namespace std;
 
 class ArrayList {
@@ -60,6 +61,53 @@ class ArrayList {
 
 			cout << data[size-1] << "]" << endl;	
 		}
+
+
+		int &operator[](int i) {
+			if (0 <= i and i < size) {
+				return data[i];
+			} else {
+				throw out_of_range("IndexError");
+			}
+		}
+
+		void insert(int val, int index) {
+			int *tmp = new int[capacity];
+			if (index <= size) {
+				for (int i=0; i<index; i++) {
+					tmp[i] = data[i];
+				}
+				tmp[index] = val;
+				for (int i=(index+1); i<=(size); i++) {
+					tmp[i] = data[i-1];
+				}
+			} 
+			else {
+				throw out_of_range("IndexError");
+			}
+			delete[] data;
+			data = tmp;
+			size +=1;
+		}
+
+
+		void remove(int index) {
+			int *tmp = new int[capacity];
+			if (index <= size) {
+				for (int i=0; i<index; i++) {
+					tmp[i] = data[i];
+				}
+				for (int i=(index+1); i<(size); i++) {
+					tmp[i-1] = data[i];
+				}
+			} 
+			else {
+				throw out_of_range("IndexError");
+			}
+			delete[] data;
+			data = tmp;
+			size -=1;
+		}
 };
 
 bool is_prime(int n) {
@@ -87,6 +135,10 @@ int main() {
 	}
 	primes.print();
 	ArrayList some_primes({2, 3, 5, 8, 11});
+    some_primes.print();
+    some_primes.insert(1, 5);
+    some_primes.print();
+    some_primes.remove(3);
     some_primes.print();
 	return 0;
 }
