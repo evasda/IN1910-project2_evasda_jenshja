@@ -108,6 +108,12 @@ class ArrayList {
 			data = tmp;
 			size -=1;
 		}
+
+		int pop(int index) {
+			int pop_val = data[index];
+			remove(index);
+			return pop_val;
+		}
 };
 
 bool is_prime(int n) {
@@ -139,6 +145,9 @@ int main() {
     some_primes.insert(1, 5);
     some_primes.print();
     some_primes.remove(3);
+    some_primes.print();
+    int a = some_primes.pop(2);
+    cout << a << endl;
     some_primes.print();
 	return 0;
 }
