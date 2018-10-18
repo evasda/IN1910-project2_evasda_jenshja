@@ -1,16 +1,18 @@
 #include <iostream>
 #include <vector>
 #include <stdexcept>
+#include <math.h>   
 using namespace std;
 
 class ArrayList {
 	private:
 		int *data;
-		int capacity;
+		//int capacity;
 		int growth_factor = 2;
 
 	public:
 		int size;
+		int capacity;
 
 		ArrayList()  {
 			size = 0;
@@ -20,7 +22,7 @@ class ArrayList {
 
 		ArrayList(vector<int> vect) {
 			size = 0;
-			capacity = 10;
+			capacity = 1;
 			data = new int[capacity];
 			for (int v:vect) {
 				append(v);
@@ -107,12 +109,32 @@ class ArrayList {
 			delete[] data;
 			data = tmp;
 			size -=1;
+			if (size < 0.25 * capacity) {
+				shrink_to_fit();
+			}
 		}
 
 		int pop(int index) {
 			int pop_val = data[index];
 			remove(index);
 			return pop_val;
+		}
+
+		int pop() {
+			int pop_val = data[size-1];
+			remove(size);
+			return pop_val;
+		}
+
+		void shrink_to_fit() {
+			if(size == 0 || size == 1) {
+				capacity = 1;
+			}
+			else {
+				int n; 
+				n = ceil(log(size)/log(2));
+				capacity = pow(2,n);
+		    }
 		}
 };
 
@@ -146,8 +168,23 @@ int main() {
     some_primes.print();
     some_primes.remove(3);
     some_primes.print();
-    int a = some_primes.pop(2);
+    int a = some_primes.pop();
     cout << a << endl;
     some_primes.print();
+
+    ArrayList apekatt({1,1,1,1,1,1,1,1,1});
+    int c = apekatt.capacity;
+    cout << c << endl; 
+    apekatt.pop();
+    apekatt.pop();
+    apekatt.pop();
+    apekatt.pop();
+    apekatt.pop();
+    apekatt.pop();
+    apekatt.pop();
+    int d = apekatt.capacity;
+    cout << d << endl; 
+
+
 	return 0;
 }
