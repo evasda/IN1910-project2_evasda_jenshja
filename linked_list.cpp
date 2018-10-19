@@ -12,11 +12,36 @@ private:
 	Node* head;
 	Node* tail;
 
+	Node* get_node(int index) {
+    	if (index < 0 || index >= length()) {
+        	throw range_error("IndexError: Index out of range");
+    	}
+
+    	Node* current = head;
+    	for (int i=0; i<index; i++) {
+        	current = current->next;
+    	}
+    	return current;
+    }
+
 public:
 	LinkedList() {
 		head = nullptr;
 		tail = nullptr;
 	}
+
+	~LinkedList() {
+    Node* current;
+    Node* next;
+
+    current = head;
+
+    while (current != nullptr) {
+        next = current->next;
+        delete current;
+        current = next;
+    	}
+    }
 
 	int length() {
 		Node* current = head;
@@ -60,6 +85,11 @@ public:
 	    	}
 		cout << current->value << "]" << endl;	
 		}
+
+		int& operator[](int index) {
+            return get_node(index)->value;
+
+        }
 };
 
 int main() {
@@ -72,5 +102,6 @@ int main() {
 	primes.print(); 
 	cout << "length of primes: ";
 	cout << primes.length() << endl;
+	cout << primes[2] << endl;
 	return 0;
 }
