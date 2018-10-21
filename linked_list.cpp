@@ -84,15 +84,15 @@ public:
 		}
 	}
 
-	void print() {
-		Node* current = head;
-		cout << "[";
-		while (current->next !=nullptr) {
-			cout << current->value;
-			cout << ", ";
-			current = current->next;
+		void print() {
+			Node* current = head;
+			cout << "[";
+			while (current->next !=nullptr) {
+				cout << current->value;
+				cout << ", ";
+				current = current->next;
 	    	}
-		cout << current->value << "]" << endl;	
+			cout << current->value << "]" << endl;	
 		}
 
 		int& operator[](int index) {
