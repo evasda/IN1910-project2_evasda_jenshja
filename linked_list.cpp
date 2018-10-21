@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 struct Node {
@@ -28,6 +29,14 @@ public:
 	LinkedList() {
 		head = nullptr;
 		tail = nullptr;
+	}
+
+	LinkedList(vector<int> vec) {
+		head = nullptr;
+		tail = nullptr;
+		for (int v:vec) {
+			append(v);
+		}
 	}
 
 	~LinkedList() {
@@ -88,7 +97,45 @@ public:
 
 		int& operator[](int index) {
             return get_node(index)->value;
+        }
 
+        void insert(int val, int index) {
+        	Node* current = get_node(index-1);
+        	Node* n = new Node;
+        	n->value = val;
+        	n->next = current->next;
+        	current->next = n; 
+        }
+
+        void remove(int index) {				//Can be made more efficient.
+        	Node* current = get_node(index);
+        	if (current->next == nullptr) {
+        		Node* temp = get_node(index-1);
+        		temp->next = nullptr;
+        		tail = temp;
+        	}
+        	else if (current == head) {
+        		head = current->next;
+        		current->next = nullptr;
+        	}
+
+        	else {
+        		Node* temp = get_node(index-1);
+        	    temp->next = current->next;
+        	    current->next = nullptr;
+            }
+        }
+        int pop(int index) {
+        	Node* temp = get_node(index);
+        	int pop_val = temp->value;
+        	remove(index);
+        	return pop_val;
+        }
+
+        int pop() {
+        	int pop_val = tail->value;
+        	remove(length()-1);
+        	return pop_val;
         }
 };
 
@@ -103,5 +150,15 @@ int main() {
 	cout << "length of primes: ";
 	cout << primes.length() << endl;
 	cout << primes[2] << endl;
+	primes.insert(2,2);
+	primes.print();
+	primes.remove(4);
+	primes.print();
+	cout << primes.pop(2) << endl;
+	primes.print();
+	primes.pop();
+	primes.print(); 
+	LinkedList primes_2({2,3,5,7,11});
+	primes_2.print();
 	return 0;
 }
