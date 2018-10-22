@@ -1,18 +1,21 @@
 #include <iostream>
 #include <vector>
 #include <stdexcept>
-#include <math.h>   
+#include <math.h> 
+#include <cassert>
 using namespace std;
 
 class ArrayList {
 	private:
 		int *data;
-		//int capacity;
+		int capacity;
 		int growth_factor = 2;
 
 	public:
 		int size;
-		int capacity;
+		int get_capacity() {
+			return capacity;
+		}
 
 		ArrayList()  {
 			size = 0;
@@ -154,6 +157,21 @@ bool is_prime(int n) {
 	return val;	
 }
 
+void test_ArrayList() {
+	ArrayList vec;
+	for (int i=0; i<=513; i++) {
+		vec.append(i);
+	}
+	int cap = vec.get_capacity();
+	assert(cap == 1024);
+	for (int i=0; i<=257; i++) {
+		vec.remove(i);
+	}
+	vec.shrink_to_fit();
+	int new_cap = vec.get_capacity();
+	assert(new_cap == 256);
+}
+
 int main() {
 	ArrayList primes;
 	for (int i=2; i<30; i++) {
@@ -162,19 +180,13 @@ int main() {
 		}
 	}
 	primes.print();
-	ArrayList some_primes({2, 3, 5, 8, 11});
-    some_primes.print();
-    some_primes.insert(1, 5);
-    some_primes.print();
-    some_primes.remove(3);
-    some_primes.print();
+	ArrayList some_primes({2, 3, 5, 8, 11}); //
     int a = some_primes.pop();
     cout << a << endl;
     some_primes.print();
+    cout << primes.get_capacity() << endl;
 
     ArrayList apekatt({1,1,1,1,1,1,1,1,1});
-    int c = apekatt.capacity;
-    cout << c << endl; 
     apekatt.pop();
     apekatt.pop();
     apekatt.pop();
@@ -182,9 +194,7 @@ int main() {
     apekatt.pop();
     apekatt.pop();
     apekatt.pop();
-    int d = apekatt.capacity;
-    cout << d << endl; 
 
-
+    test_ArrayList();
 	return 0;
 }
