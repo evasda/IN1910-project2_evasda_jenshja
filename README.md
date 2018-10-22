@@ -11,3 +11,7 @@ This repo contains files for project 2.
 | temove from back        | O(n)          | O(n)          | 
 | remove from middle      | O(n)          | O(n)          | 
 | print                   | O(n)          | O(n)          | 
+
+
+__4g)__
+To survive the Josephus problem with n=68 and k=7 you should choose place number 68.
