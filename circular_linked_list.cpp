@@ -75,31 +75,18 @@ public:
         }
 
     vector<int> josephus_sequence(int k) {
-    	vector<int> temp;
-    	vector<int> sequence;
-    	for (int i=1; i<=length; i++) {
-    		temp.push_back(i*k-1);
-    		cout << i*k-1 << endl;
-    	}
-
-    	for (int j:temp) {
-    		sequence.push_back(get_node(j-1)->value);
-    		remove(j);
-    	}
-    	return sequence;
-    	/*
     	int count = 1;
     	vector<int> sequence;
     	while (length != 0) {
-    		sequence.push_back(get_node((k-1)*count)->value);
-            remove((k-1)*count);
+    		sequence.push_back(get_node(k-1)->value);
+            remove_and_set_new_head(k-1);
             count ++;
     	}
     	return sequence;
-    	*/
+    	
     }
 
-        void remove(int index) {				//Can be made more efficient.
+        void remove_and_set_new_head(int index) {				//Can be made more efficient.
         	Node* current = get_node(index);
         	if (current->next == head) {
         		Node* temp = get_node(index-1);
@@ -114,11 +101,18 @@ public:
         	else {
         		Node* temp = get_node(index-1);
         	    temp->next = current->next;
+        	    head = current->next;
         	    current->next = nullptr;
             }
             length -= 1;
         }
 };
+
+int last_man_standing(int n, int k) {
+	CircLinkedList josephus(n);
+	vector<int> a = josephus.josephus_sequence(k);
+	return a[n-1];
+}
 
 int main() {
 	/*CircLinkedList primes;
@@ -129,10 +123,10 @@ int main() {
 	primes.append(11);
 	primes.print();
 	cout << primes[1] << endl; */
-	CircLinkedList josephus(10);
-	vector<int> a = josephus.josephus_sequence(2);
-	for (int b:a) {
-		cout << b << endl;
-	}
+	int n = 68;
+	int k = 7;
+	int survivor = last_man_standing(n, k);
+	cout << "The last survivor of the Josephus problem with n = " <<n;
+	cout << " and k = " << k << " is " << survivor <<"." << endl;
 	return 0;
 }
