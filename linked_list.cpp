@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cassert>
 using namespace std;
 
 struct Node {
@@ -139,26 +140,35 @@ public:
         }
 };
 
-int main() {
+void test_LinkedList() {
+	// Testing append
 	LinkedList primes;
 	primes.append(2);
 	primes.append(3);
 	primes.append(5);
-	primes.append(7);
-	cout << "primes = ";
+	primes.append(11);
+	// Testing print
 	primes.print(); 
-	cout << "length of primes: ";
-	cout << primes.length() << endl;
-	cout << primes[2] << endl;
-	primes.insert(2,2);
-	primes.print();
-	primes.remove(4);
-	primes.print();
-	cout << primes.pop(2) << endl;
-	primes.print();
-	primes.pop();
-	primes.print(); 
-	LinkedList primes_2({2,3,5,7,11});
+    // Testing []
+	assert(3 == primes[1]);
+    // Testing insert 
+    primes.insert(7,3);
+    assert(7 == primes[3]);
+    // Testing remove
+    primes.remove(3);
+    assert(7 != primes[3]);
+    // Testing pop(int) 
+    int pop_val = primes.pop(0);
+    assert(2 == pop_val);
+    // Testing pop()
+    int pop_val2 = primes.pop();
+    assert(11 == pop_val2);
+    // Testing LinkedList(vector<int>)
+	LinkedList primes_2({2,3,5,11});
 	primes_2.print();
+}
+
+int main() {
+	test_LinkedList();
 	return 0;
 }
