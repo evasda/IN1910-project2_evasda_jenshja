@@ -180,21 +180,7 @@ int main() {
 		}
 	}
 	primes.print();
-	ArrayList some_primes({2, 3, 5, 8, 11}); //
-    int a = some_primes.pop();
-    cout << a << endl;
-    some_primes.print();
-    cout << primes.get_capacity() << endl;
-
-    ArrayList apekatt({1,1,1,1,1,1,1,1,1});
-    apekatt.pop();
-    apekatt.pop();
-    apekatt.pop();
-    apekatt.pop();
-    apekatt.pop();
-    apekatt.pop();
-    apekatt.pop();
-
+	
     test_ArrayList();
 	return 0;
 }
