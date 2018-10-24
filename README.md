@@ -12,6 +12,7 @@ This repo contains files for project 2.
 | remove from middle      | O(n)          | O(n)          | 
 | print                   | O(n)          | O(n)          | 
 
-
+![O(n)](https://latex.codecogs.com/gif.latex?%5Cmathcal%20O%28n%29)
+![O(1)](https://latex.codecogs.com/gif.latex?%5Cmathcal%20O%281%29)
 __4g)__
 To survive the Josephus problem with n=68 and k=7 you should choose place number 68.
