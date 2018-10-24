@@ -11,14 +11,13 @@ struct Node {
 class CircLinkedList {
 private:
 	Node* head;
-
+	int length;
 	Node* get_node(int index) {
 		if (head == nullptr) {
         	throw range_error("RangeError: Circular List is empty.");
         }
 		int x = floor(index/length);
 		int real_index = index - x*length;
-
     	Node* current = head;
     	for (int i=0; i<real_index; i++) {
         	current = current->next;
@@ -27,8 +26,6 @@ private:
     }
 
 public:
-	int length;
-
 	CircLinkedList() {
 		head = nullptr;
 		length = 0;
@@ -71,42 +68,36 @@ public:
 		cout << current->value << "]" << endl;	
 	}
 
-		int& operator[](int index) {
-            return get_node(index)->value;
+    int& operator[](int index) {
+        return get_node(index)->value;
+    }
+
+    void remove_and_set_new_head(int index) {				//Can be made more efficient.
+    	Node* current = get_node(index);
+    	if (current->next == head) {
+    		Node* temp = get_node(index-1);
+    		temp->next = head;
+    	}
+    	else if (current == head) {
+    		head = current->next;
+    		get_node(length-2)->next = head;
+    	}
+    	else {
+    		Node* temp = get_node(index-1);
+    	    temp->next = current->next;
+    	    head = current->next;
         }
+        length -= 1;
+    }
 
     vector<int> josephus_sequence(int k) {
-    	int count = 1;
     	vector<int> sequence;
     	while (length != 0) {
     		sequence.push_back(get_node(k-1)->value);
             remove_and_set_new_head(k-1);
-            count ++;
     	}
-    	return sequence;
-    	
+    	return sequence;    	
     }
-
-        void remove_and_set_new_head(int index) {				//Can be made more efficient.
-        	Node* current = get_node(index);
-        	if (current->next == head) {
-        		Node* temp = get_node(index-1);
-        		temp->next = head;
-        	}
-        	else if (current == head) {
-        		head = current->next;
-        		current->next = nullptr;
-        		get_node(length-2)->next = head;
-
-        	}
-        	else {
-        		Node* temp = get_node(index-1);
-        	    temp->next = current->next;
-        	    head = current->next;
-        	    current->next = nullptr;
-            }
-            length -= 1;
-        }
 };
 
 int last_man_standing(int n, int k) {
@@ -116,14 +107,6 @@ int last_man_standing(int n, int k) {
 }
 
 int main() {
-	/*CircLinkedList primes;
-	primes.append(2);
-	primes.append(3);
-	primes.append(5);
-	primes.append(7);
-	primes.append(11);
-	primes.print();
-	cout << primes[1] << endl; */
 	int n = 68;
 	int k = 7;
 	int survivor = last_man_standing(n, k);
