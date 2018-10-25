@@ -72,7 +72,7 @@ public:
         return get_node(index)->value;
     }
 
-    void remove_and_set_new_head(int index) {				//Can be made more efficient.
+    void remove_and_set_new_head(int index) {
     	Node* current = get_node(index);
     	if (current->next == head) {
     		Node* temp = get_node(index-1);
