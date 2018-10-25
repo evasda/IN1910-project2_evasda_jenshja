@@ -12,7 +12,7 @@ class LinkedList {
 private:
 	Node* head;
 	Node* tail;
-    int size; // Is equivalent to length(). Since many of the methods are dependent of the length of the linked list, using size is more efficient. 
+    int size;
 
 	Node* get_node(int index) {
     	if (index < 0 || index >= size) {
@@ -54,13 +54,7 @@ public:
  
 
 	int length() {
-		Node* current = head;
-		int count = 0;
-		while (current != nullptr) {
-			count++;
-			current = current->next;
-		}
-		return count;	
+		return size;	
 	}
 
 	void append(int val) {
@@ -102,15 +96,24 @@ public:
     }
 
     void insert(int val, int index) {
-    	Node* current = get_node(index-1);
-    	Node* n = new Node;
-    	n->value = val;
-    	n->next = current->next;
-    	current->next = n;
-        size += 1; 
+        if (index == 0) {
+            Node* current = get_node(0);
+            Node* n = new Node; 
+            n->value = val;
+            n->next = current;
+            head = n;
+        }
+        else {
+    	    Node* current = get_node(index-1);
+    	    Node* n = new Node;
+    	    n->value = val;
+    	    n->next = current->next;
+    	    current->next = n;
+            } 
+        size += 1;
     }
 
-    void remove(int index) {				//Can be made more efficient.
+    void remove(int index) {
     	Node* current = get_node(index);
     	if (current->next == nullptr) {
     		Node* temp = get_node(index-1);
