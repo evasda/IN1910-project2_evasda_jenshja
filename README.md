@@ -1,5 +1,11 @@
 # project2_evasda_jenshja
-### 3
+
+#### *__Notes to grader:__* 
++ __URL to project:__ https://github.uio.no/IN1910/project2_evasda_jenshja
++ __Compiler:__ Visual Studio 2017 Developer Command Prompt v15.0 was used in a ".sublime-build"-file. This file runs the "cl" command. 
+
+
+### __3__
 
 | Call                    | ArrayList     | LinkedList    | Comment   |
 | ----------------------- | ------------- | ------------- | ----------|
@@ -12,7 +18,7 @@
 | remove from middle      | ![O(n)](https://latex.codecogs.com/gif.latex?%5Cmathcal%20O%28n%29)  | ![O(i)](https://latex.codecogs.com/gif.latex?%5Cmathcal%20O%20%28i%29) | AL: need to copy entire list. LL: access get_node(i) twice because i=i, and then i=i-1. |
 | print                   | ![O(n)](https://latex.codecogs.com/gif.latex?%5Cmathcal%20O%28n%29)  | ![O(n)](https://latex.codecogs.com/gif.latex?%5Cmathcal%20O%28n%29)| AL: iterates entire list. LL: iterates entire list. |
 
-### 4g)
+### __4g)__
 To survive the Josephus problem with n=68 and k=7 you should choose place number 68.
 
 #### Further comment: 
