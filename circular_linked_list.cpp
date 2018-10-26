@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <cassert>
+#include <cmath>
+#include <stdexcept>
 using namespace std;
 
 struct Node {
@@ -65,7 +67,7 @@ public:
 			cout << ", ";
 			current = current->next;
     	}
-		cout << current->value << "]" << endl;	
+		cout << current->value << "]" << endl;
 	}
 
     int& operator[](int index) {
@@ -96,7 +98,7 @@ public:
     		sequence.push_back(get_node(k-1)->value);
             remove_and_set_new_head(k-1);
     	}
-    	return sequence;    	
+    	return sequence;
     }
 };
 
