@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cassert>
+#include <stdexcept>
 using namespace std;
 
 struct Node {
@@ -51,32 +52,32 @@ public:
             current = next;
         	}
         }
- 
+
 
 	int length() {
-		return size;	
+		return size;
 	}
 
 	void append(int val) {
 		if (head==nullptr) {
 			Node *n = new Node;
-            n->value = val; 
+            n->value = val;
             n->next = nullptr;
 			head = n;
 			tail = head;
             size += 1;
 			return;
 		}
-		else { 
+		else {
 			Node* current;
 			current = tail;
 			Node *n = new Node;
-            n->value = val; 
+            n->value = val;
             n->next = nullptr;
 			current->next = n;
 			tail = current->next;
             size += 1;
-			return; 
+			return;
 		}
 	}
 
@@ -88,7 +89,7 @@ public:
 			cout << ", ";
 			current = current->next;
 	   	}
-		cout << current->value << "]" << endl;	
+		cout << current->value << "]" << endl;
 	}
 
 	int& operator[](int index) {
@@ -98,7 +99,7 @@ public:
     void insert(int val, int index) {
         if (index == 0) {
             Node* current = get_node(0);
-            Node* n = new Node; 
+            Node* n = new Node;
             n->value = val;
             n->next = current;
             head = n;
@@ -109,7 +110,7 @@ public:
     	    n->value = val;
     	    n->next = current->next;
     	    current->next = n;
-            } 
+            }
         size += 1;
     }
 
@@ -125,9 +126,9 @@ public:
     	}
     	else {
     		Node* temp = get_node(index-1);
-    	    temp->next = current->next;  
+    	    temp->next = current->next;
         }
-        size -= 1;  
+        size -= 1;
     }
 
     int pop(int index) {
@@ -152,18 +153,18 @@ void test_LinkedList() {
 	primes.append(5);
 	primes.append(11);
 	// Testing print
-	primes.print(); 
-    // Testing length() 
+	primes.print();
+    // Testing length()
     assert(4 == primes.length());
     // Testing the operator []
 	assert(3 == primes[1]);
-    // Testing insert(int,int) 
+    // Testing insert(int,int)
     primes.insert(7,3);
     assert(7 == primes[3]);
     // Testing remove(int)
     primes.remove(3);
     assert(7 != primes[3]);
-    // Testing pop(int) 
+    // Testing pop(int)
     int pop_val = primes.pop(0);
     assert(2 == pop_val);
     // Testing pop()
@@ -172,7 +173,7 @@ void test_LinkedList() {
     // Testing LinkedList(vector<int>)
 	LinkedList primes_2({2,3,5,11});
 	primes_2.print();
-}    
+}
 
 int main() {
 	test_LinkedList();
