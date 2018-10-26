@@ -2,7 +2,7 @@
 
 #### *__Initial notes to grader:__* 
 + __URL to project:__ https://github.uio.no/IN1910/project2_evasda_jenshja
-+ __Compiler:__ Visual Studio 2017 Developer Command Prompt v15.0 was used in a ".sublime-build"-file. This file runs the "cl"-command. 
++ __Compiler:__ Visual Studio 2017 Developer Command Prompt v15.0 was used in a ".sublime-build"-file. This file runs the "cl"-command. If you are going to run the files on linux, use makefile or -std=c++0x in terminal. 
 
 
 ### __3__
